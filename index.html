@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="res\images\valent-img.png" type="image/x-icon">
+    <title>Happy Valentine ❤</title>
+</head>
+
+<body>
+    <div>
+        <h2 id="Valen_ques">Will you be my Valentine ? (●'◡'●)</h2>
+    </div>
+    <div class="image-zone">
+        <img id="img-display" src="./res/images/image1.gif" alt="cute-images">
+    </div>
+    <div id="poem"></div>
+    <div id="btn-zone">
+        <button id="btn-1" class="bounce2">Yes</button>
+        <button id="btn-2">Để tui suy nghĩ đã</button>
+    </div>
+    <div class="heart-container">
+        <div class="music">
+            <audio src="res/bg-music .mp3" autoplay="true" controls id="music"></audio>
+        </div>
+    </div>
+</body>
+<script type="module">
+    //Declare some variables <>
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    let clickBlock = 0;
+    const yesBtn = document.getElementById("btn-1");
+    const noBtn = document.getElementById("btn-2");
+    const img = document.getElementById("img-display");
+    const valenQues = document.getElementById("Valen_ques");
+    const btnZone = document.getElementById("btn-zone");
+    const music_func = document.getElementById("music");
+    let fontSizeVirtual = 30;
+    let h_btn = 150;
+    let w_btn = 180;
+    // Array poem for real <9:16PM Nguyen Erik>
+    const poem_array = ["Hồi bé học bảng cửu chương",
+        "Lớn lên học cách yêu thương một người",
+        "Ngày bé muốn có điểm 10",
+        "Lớn lên muốn có nụ cười của em ヾ(•ω•`)o"];
+    const displayPoem = document.getElementById("poem");
+    //Image array
+    const images_array = ["res/images/image1.gif",
+        "res/images/image2.gif",
+        "res/images/image3.gif",
+        "res/images/image4.gif",
+        "res/images/image5.gif",
+        "res/images/image6.gif",
+        "res/images/image7.gif"];
+    //post data to my own server
+    document.getElementById("btn-1").addEventListener("click", () => {
+
+        fetch("http://192.168.1.2:3000/receive-signal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: "Chúc mừng chủ nhân, cô ấy đồng ý rồi !!!" }),
+        });
+        // I hope she will click here <Nguyen Erik> 1/12/2024
+        valenQues.textContent = "Yayy!!! I love you too 💖💖💖💖💖💖💖";
+        img.setAttribute('src', "./res/images/image7.gif");
+        btnZone.style.display = 'none';
+        music_func.src = "res/second-music.mp3";
+        music_func.style.display = 'block';
+        confetti({
+            particleCount: 200,
+            spread: 100,
+            origin: { x: 0.5, y: 0.5 }
+        });
+        displayPoem.style.display = 'block';
+        for (let i = 0; i < poem_array.length; i++) {
+            setTimeout(() => {
+                let x = document.createElement("p");
+                x.classList.add("fade-in");
+                x.textContent = `${poem_array[i]}`;
+                displayPoem.appendChild(x);
+            }, i * 2000);
+        }
+        confetti({
+            particleCount: 300,
+            spread: 200,
+            origin: { x: 0.5, y: 0.5 }
+        });
+        // Create trail
+            const container = document.body;
+            function createTrail(x, y) {
+                const trail = document.createElement('div');
+                trail.className = 'trail';
+                trail.textContent = '💕';
+                trail.style.left = `${x+15}px`;
+                trail.style.top = `${y+15}px`;
+                container.appendChild(trail);
+                // Remove the trail 
+                setTimeout(() => {
+                    trail.remove();
+                }, 500);
+            }
+
+            // Snowman and Trail
+            container.addEventListener('mousemove', (event) => {
+                const { clientX, clientY } = event;
+                createTrail(clientX, clientY);
+            });
+    })
+    document.getElementById("btn-2").addEventListener("click", () => {
+        fetch("http://26.2.141.32:3000/receive-signal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({ message: "Không việc gì phải buồn hết chủ nhân, hãy cố lên!" }),
+        });
+        if (clickBlock < 5) {
+            clickBlock++;
+            fontSizeVirtual += 5;
+            h_btn += 35;
+            w_btn += 35;
+            yesBtn.style.height = `${h_btn}px`;
+            yesBtn.style.width = `${w_btn}px`;
+            yesBtn.style.fontSize = `${fontSizeVirtual}px`;
+            img.src = images_array[clickBlock];
+            console.log(img.src);
+            if (clickBlock < 6) {
+                noBtn.textContent = ["No", "Are you sure?", "Pookie please 😥", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][clickBlock];
+            }
+        }
+    })
+    // Script for heart
+    const heartContainer = document.querySelector('.heart-container');
+
+    for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 5 + Math.random() * 2 + 's';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        heartContainer.appendChild(heart);
+    }
+
+</script>
+
+</html>

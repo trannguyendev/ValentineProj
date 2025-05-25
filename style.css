@@ -5,9 +5,13 @@
 }
 
 body {
-  margin: auto;
-  width: 1000px;
-  height: 100vh;
+  margin: 0;
+  padding: 15px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
   background: linear-gradient(to bottom, #ff99cc, #ffccff) no-repeat;
   background-size: cover;
 
@@ -15,6 +19,11 @@ body {
 
 #btn-zone {
   margin-top: 2%;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 #btn-1 {
@@ -91,6 +100,9 @@ body {
   box-shadow: 0 5px 15px rgba(255, 0, 102, 0.3);
   margin-bottom: 20px;
   animation: glow 2s infinite alternate;
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 15px 0;
 }
 
 @keyframes glow {
@@ -170,6 +182,54 @@ body {
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(255, 0, 102, 0.3);
   margin-bottom: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.music {
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
+}
+
+audio {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    #Valen_ques {
+        font-size: 1.4rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .trail {
+        font-size: 1rem;
+    }
+
+    .heart {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    body {
+        padding: 10px;
+    }
+
+    #btn-zone {
+        gap: 10px;
+    }
+
+    button {
+        min-width: 100px;
+    }
 }
 
 .fade-in {

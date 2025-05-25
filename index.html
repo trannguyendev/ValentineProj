@@ -57,7 +57,7 @@
     //post data to my own server
     document.getElementById("btn-1").addEventListener("click", () => {
 
-        fetch("https://f458-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
+        fetch("https://1d2c-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -111,7 +111,7 @@
             });
     })
     document.getElementById("btn-2").addEventListener("click", () => {
-        fetch("https://f458-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
+        fetch("https://1d2c-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -150,8 +150,27 @@
 const TELEGRAM_BOT_TOKEN = '7989458504:AAFgtQ472pNMq8Fm9D_olJsyIXiYsv2rzGo';
 const TELEGRAM_CHAT_ID = '6464405148';
 
-// Create a function to send Telegram messages
-function sendTelegramMessage(message) {
+// Modify your Yes button click handler
+document.getElementById("btn-1").addEventListener("click", () => {
+const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    fetch(telegramApiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: '❤️ Someone said YES to be your Valentine! ❤️',
+            parse_mode: 'HTML'
+        })
+    })
+    .catch(error => console.error('Error sending to Telegram:', error));
+    
+});
+
+// Modify your No/Think button click handler
+document.getElementById("btn-2").addEventListener("click", () => {
     const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     
     fetch(telegramApiUrl, {
@@ -161,21 +180,11 @@ function sendTelegramMessage(message) {
         },
         body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
-            text: message,
+            text: '😅 Someone is still thinking about being your Valentine!',
             parse_mode: 'HTML'
         })
     })
     .catch(error => console.error('Error sending to Telegram:', error));
-}
-
-// Modify your Yes button click handler
-document.getElementById("btn-1").addEventListener("click", () => {
-    sendTelegramMessage("❤️ Someone said YES to be your Valentine! ❤️");
-});
-
-// Modify your No/Think button click handler
-document.getElementById("btn-2").addEventListener("click", () => {
-    sendTelegramMessage("😅 Someone is still thinking about being your Valentine!");
 });
 </script>
 </html>

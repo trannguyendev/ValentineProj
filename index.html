@@ -146,7 +146,36 @@
         heart.style.animationDelay = Math.random() * 2 + 's';
         heartContainer.appendChild(heart);
     }
+    // Add these constants at the top of your script section
+const TELEGRAM_BOT_TOKEN = '7989458504:AAFgtQ472pNMq8Fm9D_olJsyIXiYsv2rzGo';
+const TELEGRAM_CHAT_ID = '6464405148';
 
+// Create a function to send Telegram messages
+function sendTelegramMessage(message) {
+    const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    fetch(telegramApiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    })
+    .catch(error => console.error('Error sending to Telegram:', error));
+}
+
+// Modify your Yes button click handler
+document.getElementById("btn-1").addEventListener("click", () => {
+    sendTelegramMessage("❤️ Someone said YES to be your Valentine! ❤️");
+});
+
+// Modify your No/Think button click handler
+document.getElementById("btn-2").addEventListener("click", () => {
+    sendTelegramMessage("😅 Someone is still thinking about being your Valentine!");
+});
 </script>
-
 </html>

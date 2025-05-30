@@ -11,14 +11,14 @@
 
 <body>
     <div>
-        <h2 id="Valen_ques">Will you be my Valentine ? (●'◡'●)</h2>
+        <h2 id="Valen_ques">Em đồng ý làm người anh yêu nhaa (●'◡'●)</h2>
     </div>
     <div class="image-zone">
         <img id="img-display" src="./res/images/image1.gif" alt="cute-images">
     </div>
     <div id="poem"></div>
     <div id="btn-zone">
-        <button id="btn-1" class="bounce2">Yes</button>
+        <button id="btn-1" class="bounce2">Yẹt, iem đồng ý :3</button>
         <button id="btn-2">Để tui suy nghĩ đã</button>
     </div>
     <div class="heart-container">
@@ -40,6 +40,10 @@
     let fontSizeVirtual = 30;
     let h_btn = 150;
     let w_btn = 180;
+    //set the default ngrok URL ( I would like to change it when I restart ngrok ) <Nguyen Erik 3:05PM 30/5/2025
+    let ngrokUrl = "https://00e8-2001-ee0-78c9-ce60-74f7-8344-8cec-1bc7.ngrok-free.app";
+    let endPoint = "/receive-signal";
+    const combinedUrl = ngrokUrl + endPoint;
     // Array poem for real <9:16PM Nguyen Erik>
     const poem_array = ["Hồi bé học bảng cửu chương",
         "Lớn lên học cách yêu thương một người",
@@ -57,7 +61,7 @@
     //post data to my own server
     document.getElementById("btn-1").addEventListener("click", () => {
 
-        fetch("https://1d2c-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
+        fetch(combinedUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -111,7 +115,7 @@
             });
     })
     document.getElementById("btn-2").addEventListener("click", () => {
-        fetch("https://1d2c-2001-ee0-78c9-ce60-3d9f-4d43-6aa5-9c95.ngrok-free.app/receive-signal", {
+        fetch(combinedUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -152,7 +156,7 @@ const TELEGRAM_CHAT_ID = '6464405148';
 
 // Modify your Yes button click handler
 document.getElementById("btn-1").addEventListener("click", () => {
-const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+const telegramApiUrl = `https://steep-pine-2e50.trannguyen4862.workers.dev/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     
     fetch(telegramApiUrl, {
         method: 'POST',
@@ -171,7 +175,7 @@ const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMe
 
 // Modify your No/Think button click handler
 document.getElementById("btn-2").addEventListener("click", () => {
-    const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const telegramApiUrl = `https://steep-pine-2e50.trannguyen4862.workers.dev/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     
     fetch(telegramApiUrl, {
         method: 'POST',

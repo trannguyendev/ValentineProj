@@ -13,12 +13,11 @@ app.post('/receive-signal', (req, res) => {
         // Log the received data from client
         console.log('Signal received from client:', req.body);
         
-        // You can access specific fields if client sends JSON data
-        // For example, if client sends { message: "Hello" }
         const clientMessage = req.body.message;
-        console.log('Client message:', clientMessage);
+        
 
         res.status(200).json({ message: 'Signal received successfully' });
+        res.status(200).json({ message: 'Client message:' , clientMessage });
     } catch (error) {
         console.error('Error processing signal:', error);
         res.status(500).json({ error: 'Internal server error' });
